@@ -23,7 +23,7 @@ chat = model.start_chat()
 chat.send_message(initial_prompt)
 
 def main():
-    st.title("BMCC Student Support Chat")
+    st.title("BMCC Mental Health Support Chat")
     st.write("Welcome! Type your message below to chat with our virtual mental health assistant. Type 'exit' to end the conversation.")
 
     # Ensure conversation history is maintained in session state
