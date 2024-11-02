@@ -29,7 +29,6 @@ def main():
     # Ensure conversation history is maintained in session state
     if "conversation" not in st.session_state:
         st.session_state.conversation = []
-
             st.write(f"Assistant: {message['text']}")
 
     # Input field for user input, displayed after chat history
