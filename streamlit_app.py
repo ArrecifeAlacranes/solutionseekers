@@ -29,20 +29,29 @@ def main():
     # Ensure conversation history is maintained in session state
     if "conversation" not in st.session_state:
         st.session_state.conversation = []
+
+    # Display conversation history
+    for message in st.session_state.conversation:
+        if message["from"] == "user":
+            st.write(f"You: {message['text']}")
+        else:
             st.write(f"Assistant: {message['text']}")
 
     # Input field for user input, displayed after chat history
-    user_input = st.text_input("You:", key="user_input")
     user_input = st.text_input("You:")
 
-    # Send button functionality
     if st.button("Send"):
         if user_input:
             if user_input.lower() == 'exit':
+                st.write("Take care! Remember, BMCC Counseling Center: (212) 220-8140")
+            else:
+                # Get response from the assistant
+                response = chat.send_message(user_input)
+                st.session_state.conversation.append({"from": "user", "text": user_input})
+                st.session_state.conversation.append({"from": "assistant", "text": response.text})
                 st.write(f"Assistant: {response.text}")
 
             # Clear the input field after sending
-            st.session_state.user_input = ""
             st.session_state.user_input = ""  # Resetting text input if needed
 
 if __name__ == "__main__":
