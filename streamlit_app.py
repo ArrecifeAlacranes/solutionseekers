@@ -18,48 +18,33 @@ life, including academic stress, balancing responsibilities, and personal develo
 with empathy, using simple and encouraging language, and suggest actionable steps they can take to improve their 
 well-being. Your goal is to create a safe space for students to feel heard and supported."""
 
-# Initialize chat with initial prompt if not done already
-if "chat" not in st.session_state:
-    chat = model.start_chat()
-    chat.send_message(initial_prompt)
-    st.session_state.chat = chat
-
-# Initialize conversation history in session state
-if "conversation" not in st.session_state:
-    st.session_state.conversation = []
+# Initialize chat with initial prompt
+chat = model.start_chat()
+chat.send_message(initial_prompt)
 
 def main():
     st.title("BMCC Student Support Chat")
     st.write("Welcome! Type your message below to chat with our virtual mental health assistant. Type 'exit' to end the conversation.")
 
-    # Display conversation history
-    for message in st.session_state.conversation:
-        if message["from"] == "user":
-            st.write(f"You: {message['text']}")
-        else:
+    # Ensure conversation history is maintained in session state
+    if "conversation" not in st.session_state:
+        st.session_state.conversation = []
+
             st.write(f"Assistant: {message['text']}")
 
     # Input field for user input, displayed after chat history
     user_input = st.text_input("You:", key="user_input")
+    user_input = st.text_input("You:")
 
     # Send button functionality
     if st.button("Send"):
         if user_input:
             if user_input.lower() == 'exit':
-                st.write("Take care! Remember, BMCC Counseling Center: (212) 220-8140")
-            else:
-                # Get response from the assistant
-                response = st.session_state.chat.send_message(user_input)
-                
-                # Append user and assistant messages to conversation history
-                st.session_state.conversation.append({"from": "user", "text": user_input})
-                st.session_state.conversation.append({"from": "assistant", "text": response.text})
-                
-                # Display latest assistant response
                 st.write(f"Assistant: {response.text}")
 
             # Clear the input field after sending
             st.session_state.user_input = ""
+            st.session_state.user_input = ""  # Resetting text input if needed
 
 if __name__ == "__main__":
     main()
