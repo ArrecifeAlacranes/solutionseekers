@@ -26,6 +26,7 @@ def main():
     st.title("BMCC Student Support Chat")
     st.write("Welcome! Type your message below to chat with our virtual mental health assistant. Type 'exit' to end the conversation.")
 
+    # Ensure conversation history is maintained in session state
     if "conversation" not in st.session_state:
         st.session_state.conversation = []
 
@@ -37,9 +38,8 @@ def main():
             st.write(f"Assistant: {message['text']}")
 
     # Input field for user input, displayed after chat history
-    user_input = st.text_input("You:", key="user_input")
+    user_input = st.text_input("You:")
 
-    # Send button functionality
     if st.button("Send"):
         if user_input:
             if user_input.lower() == 'exit':
@@ -52,7 +52,7 @@ def main():
                 st.write(f"Assistant: {response.text}")
 
             # Clear the input field after sending
-            st.session_state.user_input = ""
+            st.session_state.user_input = ""  # Resetting text input if needed
 
 if __name__ == "__main__":
     main()
