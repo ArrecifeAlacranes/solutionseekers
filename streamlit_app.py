@@ -37,23 +37,23 @@ def main():
         else:
             st.write(f"Assistant: {message['text']}")
 
-    # Input field for user input, displayed after chat history
-    user_input = st.text_input("You:")
+    # Input field for user input
+    user_input = st.text_input("You:", key="user_input")
     
     # Button and Enter key functionality
-    if st.button("Send") or user_input:
-        if user_input:
-            if user_input.lower() == 'exit':
-                st.write("Take care! Remember, BMCC Counseling Center: (212) 220-8140")
-            else:
-                # Get response from the assistant
-                response = chat.send_message(user_input)
-                st.session_state.conversation.append({"from": "user", "text": user_input})
-                st.session_state.conversation.append({"from": "assistant", "text": response.text})
-                st.write(f"Assistant: {response.text}")
+    if st.button("Send") or (user_input and st.session_state.user_input):
+        if user_input.lower() == 'exit':
+            st.write("Take care! Remember, BMCC Counseling Center: (212) 220-8140")
+        else:
+            # Get response from the assistant
+            response = chat.send_message(user_input)
+            st.session_state.conversation.append({"from": "user", "text": user_input})
+            st.session_state.conversation.append({"from": "assistant", "text": response.text})
+            st.write(f"You: {user_input}")
+            st.write(f"Assistant: {response.text}")
 
-            # Clear the input field after sending
-            st.session_state.user_input = ""  # Resetting text input if needed
+        # Clear the input field after sending
+        st.session_state.user_input = ""  # Resetting text input if needed
 
 if __name__ == "__main__":
     main()
