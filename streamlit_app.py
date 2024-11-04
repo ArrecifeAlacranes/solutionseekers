@@ -38,7 +38,7 @@ def main():
             st.write(f"Assistant: {message['text']}")
 
     # Input field for user input, displayed after chat history
-    user_input = st.text_input("You:", key="user_input")
+    user_input = st.text_input("You:")
     
     # Button and Enter key functionality
     if st.button("Send") or user_input:
