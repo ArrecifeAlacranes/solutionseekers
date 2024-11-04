@@ -37,9 +37,11 @@ def main():
         else:
             st.write(f"Assistant: {message['text']}")
 
-    # Conditional Display of Input Field
-    if st.button("Send"):
-        user_input = st.text_input("You:")
+    # Input field for user input, displayed after chat history
+    user_input = st.text_input("You:", key="user_input")
+    
+    # Button and Enter key functionality
+    if st.button("Send") or user_input:
         if user_input:
             if user_input.lower() == 'exit':
                 st.write("Take care! Remember, BMCC Counseling Center: (212) 220-8140")
